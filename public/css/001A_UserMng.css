@@ -1,0 +1,311 @@
+* { box-sizing: border-box; }
+
+/* Content Style  */
+  .cardStatus{
+     min-height: 1000px;
+     background-color: white;
+     padding: 15px;
+     margin-top: 20px;
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 5);
+  }
+ @media screen and (max-width: 600px) {
+   .cardStatus{
+     min-height: 100%;} 
+}  
+
+/* select, txt, and button style  */
+.input-container {
+  display: flex;
+  width: 100%;
+  margin-bottom: 10px;
+}
+ .txtSearch, .txtSearchBy{
+  padding: 5px 13px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}  
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+  width: 50%;
+  padding: 0%;
+}
+.txtSearch{width: 100%;}
+
+.txtSearchBy {
+  width: 20%;
+}  
+.btn, .submit {
+  background-color: dodgerblue;
+  color: white;
+  padding: 5px 13px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+.btn:hover,  .submit:hover  {
+  opacity: 1;
+} 
+@media screen and (max-width: 600px) {
+  .txtSearchBy {
+    width: 60%;
+  } 
+  .txtSearch {
+    width: 100%;
+   } 
+  .autocomplete {
+    width: 80%;
+  }
+}  
+
+
+/* Auto COmplete Items Design */
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.autocomplete-items div {
+  padding: 1px;
+  cursor: pointer;
+  background-color: #fff; 
+  border-bottom: 1px solid #d4d4d4; 
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+  background-color: #e9e9e9; 
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
+}
+
+/* Table Style */
+#tblUsers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+     max-height: 2000000px;
+}
+
+#tblUsers td, #tblUsers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#tblUsers tr:nth-child(even){background-color: #f2f2f2;}
+
+#tblUsers tr:hover {background-color: #ddd;}
+
+#tblUsers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgb(30, 144, 255,1);;
+  color: white;
+}
+.fa-trash{
+  cursor: pointer;
+}
+
+
+/* ^^^^^^^^^^^^ADD/EDIT User Form */
+/* Full-width input fields */
+.modal input[type=text],.modal input[type=password], .modal select, .modal option {
+  width: 100%;
+  padding: 10px ;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* Add a background color when the inputs get focus */
+.modal input[type=text]:focus,.modal input[type=password]:focus,.modal select {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for all buttons */
+.modal button, .imgInp {
+  background-color:dodgerblue;
+  color: white;
+  padding: 9px 15px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.modal button:hover {
+  opacity:1;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .savebtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+  
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,2);
+        background-color: rgb(30, 144, 255,1); /* Black with a little bit see-through  rgb(142, 220, 240); */
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+.modal hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+ 
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .signupbtn {
+     width: 100%;
+  }
+}
+
+
+
+/* ^^^^^^^^^^^^Delete User Form *//* Full-width input fields */
+/* Set a style for all buttons */
+.modalDel button{
+  background-color:dodgerblue;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.modalDel button:hover {
+  opacity:1;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.Delcancelbtn, .Delsubmitbtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add padding to container elements */
+.DelContainer {
+  padding: 16px;
+}
+.modalDel {
+   display: none; /*Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0);
+        background-color: rgb(30, 144, 255,0.9); /* Black with a little bit see-through */
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modalDel-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto;  /*5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 60%; /* Could be more or less, depending on screen size */
+}
+/* Style the horizontal ruler */
+.modalDel hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .Delcancelbtn, .Delsubmitbtn {
+     width: 100%;
+  }
+}

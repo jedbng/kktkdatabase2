@@ -1,0 +1,161 @@
+/* .................................Other Contents Style*/
+    /* Fake image */
+    .fakeimg {
+      background-color: #aaa;
+      width: 100%;
+      padding: 20px;
+    }
+
+    /* Add a card effect for articles */
+    .cardMenu{
+       background-color: white;
+       margin-top: 20px;
+       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 5);
+    }
+    .cardPage {
+       background-color: white;
+       padding: 10px;
+       margin-top: 20px;
+       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 5);
+    }
+    .cardSecCounter{
+       background-color: white;
+       padding: 10px;
+       margin-top: 20px;
+       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 5);
+    }
+    .card {
+       background-color: white;
+       padding: 20px;
+       margin-top: 20px;
+       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 5);
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+/* .....................................................................................................SIDE CARD LEFT*/
+    /* Left column */
+    .leftcolumn  {   
+      float: left;
+      width: 25%;
+    }
+
+
+
+    /* Left column */
+    .containers a:hover {   
+      background: #bbb;
+    }
+
+    /* Left column */
+    .cardPage a:hover {   
+      background: #bbb;
+    }
+
+
+/* SECTION COUNTER or OVERVIEW */
+    /* Float four columns side by side */
+   .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 10px;
+      }
+    .row {margin: 0 -5px;}
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    /* Responsive columns */
+    @media screen and (max-width: 650px) {
+      .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 10px;
+      }
+    }
+    /* Style the counter cards */
+    .cardSCol {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      padding: 16px;
+      text-align: center;
+      background-color: #444;
+      color: white;
+    }
+
+/* ........................................................................................................................SIDE CARD Right*/
+  /* Right column */
+  .rightcolumn  {
+    float: left;
+    width: 75%;
+    padding-left: 20px;
+  }
+
+/* dfdsgsft dfgfd gfdgfd  */
+  .cardStatus{
+     background-color: white;
+     padding: 15px;
+     margin-top: 20px;
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 5);
+  }
+ .chart_div{   display: block;}
+
+ /* Table Style */
+#tblCeleb {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+     max-height: 2000000px;
+}
+#tblCeleb td, #tblCeleb th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#tblCeleb tr:nth-child(even){background-color: #f2f2f2;}
+#tblCeleb tr:hover {background-color: #ddd;}
+#tblCeleb th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgb(30, 144, 255,1);;
+  color: white;
+}
+
+
+/* ........................................................................................................................Others*/
+
+
+/* Show sideBar when cliclk (w/ javascript codes) */
+.showSideBar {
+   display: none;
+}
+
+
+
+
+/* ........................................................................................................................RESPONSIVE*/
+
+/* Responsive layout - when the screen is less than 600px wide*/
+@media screen and (max-width: 1200px) {
+  
+ /*  make the two columns stack on top of each other instead of next to each other */
+  .leftcolumn, .rightcolumn {   
+    width: 100%;
+    padding: 0;
+  }
+
+
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+    .navbar a {
+      float: none;
+      width: 100%;
+    }
+}

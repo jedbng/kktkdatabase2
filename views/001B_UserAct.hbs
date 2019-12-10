@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>User Management</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="/001B_UserAct.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'> 
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="/jquery-3.4.1.js"></script> 
+    <script src="/myScript.js"></script> 
+    <script src="/001B_UserAct.js"></script> 
+    <script src="/autoComplete.js"></script> 
+</head>
+
+
+<body onscroll="window.onscroll=function(){LoadSticky(); scrollFunction()};">
+    <!--..........HEADER-->
+        <div class="header">
+            <img src="/header.png" alt="logo">
+        </div>
+    <!-- .........NAV BAR -->
+        <div class="navbar" id="navbar">
+              <a href="#menu" class="menu" type="submit" onclick="responsiveNavBar();"><i class="fa fa-bars"></i></a>
+              <a href="/Home"><i class="fa fa-home"></i> HOME</a>
+              <div class="dropdown">
+                   <button class="dropbtn" onclick="dropdownClick(1);"><i class="fa fa-database"></i>  DATA <i class="fa fa-caret-down"></i></button>  
+                     <div class="dropdown-content" id="myDropdownData">
+                        <a href="" onclick="alert('Comming Soon');">Database</a>
+                        <a href="" onclick="alert('Comming Soon');">Transfered</a>
+                        <a href="" onclick="alert('Comming Soon');">Archived</a>
+                     </div>
+              </div>
+              <div class="dropdown">
+                    <button class="dropbtn" onclick="dropdownClick(2);"><i class="fa fa-bar-chart"></i> REPORTS <i class="fa fa-caret-down"></i></button>  
+                    <div class="dropdown-content" id="myDropdownReport">
+                     <a href="" onclick="alert('Comming Soon');">Statistic</a>
+                     <a href="" onclick="alert('Comming Soon');">Committees</a>
+                    </div>
+                  </div> 
+              <div class="dropdown">
+                    <button class="dropbtn" onclick="dropdownClick(3);"><i class="fa fa-user"></i>       USER <i class="fa fa-caret-down"></i></button>  
+                    <div class="dropdown-content" id="myDropdownUser">
+                      <a href="/UserMan">User Management</a>
+                      <a href="/UserAct">User Activity</a>
+                      <a href="/logout">Logout</a>
+                    </div>
+              </div>
+              <a href="#" class="right"  type="submit" onclick="openSearch()">
+                <i class="fa fa-search"></i>
+              </a> 
+        </div>
+
+     <!--Overlayed Search Window-->
+          <div id="myOverlaySearch" class="overlaySearch">
+            <span class="closebtn" onclick="closeSearch()" title="Close Overlay">×</span>
+            <div class="overlay-content">
+              <form action="/action_page.php">
+                <input type="text" placeholder="Search.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+              </form>
+            </div>
+          </div>
+
+
+    <!-- .........CONTENT -->
+    <div class="content">
+          <div class="row">
+              <div class="centerColumnsss">
+                      <!--CARD stat-->
+                      <div class="cardStatus">
+                        <h2 style="cursor:pointer;"><i class="fa fa-table"></i> User Activity</h2>
+                        <hr>
+                        <!-- .......Login Form -->
+                        <form action="/UserActGetValue"  method="post" >
+                            <label style="font-size: 15px;"><strong>Search By:</strong> </label><br>
+                            <div class="input-container">
+                                <select type="input" name="SearchBy" class="txtSearchBy" id="txtSearchBy"  onchange="searchbySelect('{{UserList}}','{{UserActList}}');">
+                                    <option value="a">Date Only</option>
+                                    <option value="b">Time</option>
+                                    <option value="c">User Name</option>
+                                    <option value="d">Activity</option>
+                                </select> &nbsp;
+                                <div class="autocomplete" >
+                                   <input type="text" class="txtSearch" id="txtSearch" name="txtSearch" placeholder="Search" autocomplete="off">
+                                </div> &nbsp;
+                                <button type="submit" class="btn" ><i class="fa fa-search icon"></i> </button>
+                            </div>
+                          <div class="input-container-b">
+                             <label style="font-size: 15px;" class="dateLabel"><strong>  From:</strong> </label>&nbsp;
+                               <input type="date" name="dateFrom" class="date">&nbsp;
+                               <label style="font-size: 15px;" class="dateLabel"><strong>  To:</strong> </label>&nbsp;
+                               <input type="date" name="dateTo" class="date">
+                          </div>
+
+
+                                <br>
+                                <div style="overflow-x:auto;">  
+                                    <table  id="tblUserAct" >
+                                          <thead>
+                                            <tr>
+                                              <th>Date</th>
+                                              <th>Time</th>
+                                              <th>User</th>
+                                              <th>Activity</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody >
+                                            {{#each results}}
+                                            <tr>    
+                                              <td > {{Date}}</td>
+                                              <td>{{ Time }}</td>  
+                                              <td>{{ User }}</td>
+                                              <td>{{ Activity }}</td> 
+                                           </tr>
+                                            {{/each}}
+                                          </tbody>
+                                    </table>
+                                    </div>
+                        </form>
+                      </div>
+              </div>
+        </div>  <!--Row Class end-->
+    </div>  <!--Content Class end-->
+
+
+  
+
+    <!-- ............Back to Top Button -->
+      <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+    <!-- .............FOOTER -->
+      <div class="footer">
+        <h2 style="font-size: 13px; ">© 2019 Copyright JedBanaag.</h2>
+      </div>
+
+</body>
+</html>
+
+
+

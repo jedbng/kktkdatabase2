@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>User Management</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="/001A_UserMng.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'> 
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="/jquery-3.4.1.js"></script> 
+    <script src="/myScript.js"></script> 
+    <script src="/001A_UserMng.js"></script> 
+    <script src="/autoComplete.js"></script> 
+</head>
+
+
+<body onscroll="window.onscroll=function(){LoadSticky(); scrollFunction()};">
+    <!--..........HEADER-->
+        <div class="header">
+            <img src="/header.png" alt="logo">
+        </div>
+    <!-- .........NAV BAR -->
+        <div class="navbar" id="navbar">
+              <a href="#menu" class="menu" type="submit" onclick="responsiveNavBar();"><i class="fa fa-bars"></i></a>
+              <a href="/Home"><i class="fa fa-home"></i> HOME</a>
+              <div class="dropdown">
+                   <button class="dropbtn" onclick="dropdownClick(1);"><i class="fa fa-database"></i>  DATA <i class="fa fa-caret-down"></i></button>  
+                     <div class="dropdown-content" id="myDropdownData">
+                        <a href="" onclick="alert('Comming Soon');">Database</a>
+                        <a href="" onclick="alert('Comming Soon');">Transfered</a>
+                        <a href="" onclick="alert('Comming Soon');">Archived</a>
+                     </div>
+              </div>
+              <div class="dropdown">
+                    <button class="dropbtn" onclick="dropdownClick(2);"><i class="fa fa-bar-chart"></i> REPORTS <i class="fa fa-caret-down"></i></button>  
+                    <div class="dropdown-content" id="myDropdownReport">
+                     <a href="" onclick="alert('Comming Soon');">Statistic</a>
+                     <a href="" onclick="alert('Comming Soon');">Committees</a>
+                    </div>
+                  </div> 
+              <div class="dropdown">
+                    <button class="dropbtn" onclick="dropdownClick(3);"><i class="fa fa-user"></i>       USER <i class="fa fa-caret-down"></i></button>  
+                    <div class="dropdown-content" id="myDropdownUser">
+                      <a href="/UserMan">User Management</a>
+                      <a href="/UserAct">User Activity</a>
+                      <a href="/logout">Logout</a>
+                    </div>
+              </div>
+              <a href="#" class="right"  type="submit" onclick="openSearch()">
+                <i class="fa fa-search"></i>
+              </a> 
+        </div>
+
+     <!--Overlayed Search Window-->
+          <div id="myOverlaySearch" class="overlaySearch">
+            <span class="closebtn" onclick="closeSearch()" title="Close Overlay">×</span>
+            <div class="overlay-content">
+              <form action="/action_page.php">
+                <input type="text" placeholder="Search.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+              </form>
+            </div>
+          </div>
+          
+    <!-- .........CONTENT -->
+    <div class="content">
+          <div class="row">
+              <div class="centerColumnsss">
+                      <!--CARD stat-->
+                      <div class="cardStatus">
+                        <h2 style="cursor:pointer;"><i class="fa fa-table"></i> User Management</h2>
+                        <hr>
+                        <!-- ......Form -->
+                        <form action="/UserManGetValue" method="post" >
+                            <label style="font-size: 15px;"><strong>Search By:</strong> </label><br>
+                            <div class="input-container">
+                                <select type="input" name="SearchBy" class="txtSearchBy" id="txtSearchBy"  onchange="searchbySelect('{{UserList}}','{{UserTypeList}}');">
+                                    <option value="0">All</option>
+                                    <option value="1">User Name</option>
+                                    <option value="2">User Type</option>
+                                </select> &nbsp;
+                                <div class="autocomplete" >
+                                   <input type="text" class="txtSearch" id="txtSearch" name="txtSearch" placeholder="Search" autocomplete="off">
+                                </div> &nbsp;
+                                <button type="submit" class="btn" ><i class="fa fa-search icon"></i>
+                                </button> &nbsp;
+                                 <button type="button" class="btn" onclick="document.getElementById('id01').style.display='block';loadModalForm('Add');"><i  class="fa fa-plus icon"></i>
+                                </button>
+                            </div>
+                                <br>
+                                <div style="overflow-x:auto;">  
+                                    <table  id="tblUsers" >
+                                          <thead>
+                                            <tr>
+                                              <th>Action</th>
+                                              <th>ID</th>
+                                              <th>Image</th>
+                                              <th>User</th>
+                                              <th>Type</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody style="overflow:scroll;">
+                                            {{#each results}}
+                                            <tr>    
+                                               <td>
+                                                <a href="javascript:void(0);" class="aEdit" data-id="{{ ID }}" data-user="{{ User }}" data-type="{{ Type }}" data-image="{{ Image }}">  <i class="fa fa-edit"></i></a>
+                                                <a href="javascript:void(0);" class="aDelete" id="aDelete" data-id="{{ ID }}"  data-user="{{User}}" ><i  class="fa fa-trash"></i></a>
+                                              </td>  
+                                              <td>{{ ID }}</td>
+                                              <td><img src="/profiles/{{ Image }}" style="vertical-align: middle; width: 35px; height:35px;border-radius: 50%;   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 5);" alt="."></td>
+                                              <td>{{ User }}</td>
+                                              <td>{{ Type }}</td>   
+                                           </tr>
+                                            {{/each}}
+                                          </tbody>
+                                    </table>
+                                    </div>
+                        </form>
+                      </div>
+              </div>
+        </div>  <!--Row Class end-->
+    </div>  <!--Content Class end-->
+
+
+
+	<!-- Add and edit  Modal-->
+    <div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'; closeModalFormEffects();" class="close" title="Close Modal">&times;</span>
+        <form class="modal-content" action="/saveUM"  method="post"  id="frmAddEdit" autocomplete="off" enctype="multipart/form-data">
+              <div class="container">
+                <h1 id="lblTitle">Add User</h1>
+                <p id="lbldetails">Please fill in this form to create an account.</p>
+                <hr>
+                <p style="color: red;" id="modalMsg"></p>
+                <label for="email"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="txtuser" id="txtuser" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="txtpsw" required>
+                
+                <label for="psw-repeat"><b>Repeat Password</b></label>
+                <input type="password" placeholder="Repeat Password" name="txtpsw_repeat" required>
+                
+                <label for="selSearchBy"><b>User Type</b></label>
+                <select name="selSearchBy" id="selType" >
+                                    <option value="Administrator">Administrator</option>
+                                    <option value="Standard User">Standard User</option>
+                </select>
+
+               
+               <input type='file' id="imgInp" name="imgInp" class="" required>  </br>
+               <p style="font-size: 20px; ">
+                      <img src="/picSample.png" alt="Profile Picture" name="imgUser" id="imgUser" style="vertical-align: middle; width: 70px; height:70px;border-radius: 50%;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 5);"> 
+               </p>
+               <hr>
+                <label id="lblRemember" >
+                  <p> <input type="checkbox" value="0" name="cbremember" id="cbremember" style="margin-bottom:15px" required> By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+               </label>
+
+                <div class="clearfix">
+                  <input type="hidden" name="inpID" class="form-control inpID"  style="display: none;">
+                  <button type="submit" class="savebtn">Save</button>
+                  <button type="button" onclick="document.getElementById('id01').style.display='none'; closeModalFormEffects();" class="cancelbtn">Cancel</button>
+                </div>
+              </div>
+        </form>
+    </div>
+
+	 <!-- Delete Product Modal-->
+   <div id="id02" class="modalDel">
+        <form class="modalDel-content" action="/deleteUM"  method="post"  enctype="multipart/form-data">
+              <div class="DelContainer">
+                <h1 id="lblTitle">Delete User</h1>
+                <hr>
+                  <p>Are you sure you want to delete <span class="pUser"></span>?</p>
+                <hr>
+                <div class="clearfix">  
+								   <input type="hidden" name="inpID" class="form-control inpID"  style="display: none;" required>
+                   <button type="submit" class="Delsubmitbtn">Delete</button>
+                   <button type="button" onclick="document.getElementById('id02').style.display='none'" class="Delcancelbtn">Cancel</button>                          
+                </div>
+              </div>
+        </form>
+    </div>
+
+
+    <!-- ............Back to Top Button -->
+      <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+    <!-- .............FOOTER -->
+      <div class="footer">
+        <h2 style="font-size: 13px; ">© 2019 Copyright JedBanaag.</h2>
+      </div>
+
+</body>
+</html>
+
+
+
+<script>
+//---Modal Msg and etc
+var MsgString='{{modalMsg}}'.split(",");
+if (MsgString[0]=="")MsgString.length =0;
+frmAction="{{frmAction}}";
+//
+if (frmAction=="Add" && MsgString.length > 0){
+  document.getElementById('id01').style.display='block';  
+  // When the modal is shown, we want a fixed body
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${window.scrollY}px`;
+  for (let i = 0; i < MsgString.length; i++) {
+           document.getElementById("modalMsg").innerHTML=document.getElementById("modalMsg").innerHTML+MsgString[i]+"<br>";
+	}
+}else if(frmAction=="Edit" &&  MsgString.length > 0){
+  var alertMsg="";
+  for (let i = 0; i < MsgString.length; i++)  alertMsg=alertMsg+MsgString[i];
+  alert(alertMsg);
+}
+
+////SearchBy auto complete Function 
+var val="{{srchByValue}}";
+if(val=="")val="0";
+document.querySelector("#txtSearchBy").options[val].selected=true;
+searchbySelect('{{UserList}}','{{UserTypeList}}');
+</script>

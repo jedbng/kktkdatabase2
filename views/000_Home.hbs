@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>KKTK Database</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="/000_Home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'> 
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="/000_Home.js"></script> 
+    <script src="/myScript.js"></script> 
+</head>
+
+
+<body onload="getStatData({{SrKKTKAct}},{{SrKKTKIn}},{{JrKKTKAct}},{{JrKKTKIn}})" onscroll="window.onscroll=function(){LoadSticky(); scrollFunction()};">
+    <!--..........HEADER-->
+        <div class="header">
+            <img src="/header.png" alt="logo">
+        </div>
+    <!-- .........NAV BAR -->
+        <div class="navbar" id="navbar">
+              <a href="#menu" class="menu" type="submit" onclick="responsiveNavBar();"><i class="fa fa-bars"></i></a>
+              <a href="/Home"><i class="fa fa-home"></i> HOME</a>
+              <div class="dropdown">
+                   <button class="dropbtn" onclick="dropdownClick(1);"><i class="fa fa-database"></i>  DATA <i class="fa fa-caret-down"></i></button>  
+                     <div class="dropdown-content" id="myDropdownData">
+                        <a href="" onclick="alert('Comming Soon');">Database</a>
+                        <a href="" onclick="alert('Comming Soon');">Transfered</a>
+                        <a href="" onclick="alert('Comming Soon');">Archived</a>
+                     </div>
+              </div>
+              <div class="dropdown">
+                    <button class="dropbtn" onclick="dropdownClick(2);"><i class="fa fa-bar-chart"></i> REPORTS <i class="fa fa-caret-down"></i></button>  
+                    <div class="dropdown-content" id="myDropdownReport">
+                     <a href="" onclick="alert('Comming Soon');">Statistic</a>
+                     <a href="" onclick="alert('Comming Soon');">Committees</a>
+                    </div>
+                  </div> 
+              <div class="dropdown">
+                    <button class="dropbtn" onclick="dropdownClick(3);"><i class="fa fa-user"></i>       USER <i class="fa fa-caret-down"></i></button>  
+                    <div class="dropdown-content" id="myDropdownUser">
+                      <a href="/UserMan">User Management</a>
+                      <a href="/UserAct">User Activity</a>
+                      <a href="/logout">Logout</a>
+                    </div>
+              </div>
+              <a href="#" class="right"  type="submit" onclick="openSearch()">
+                <i class="fa fa-search"></i>
+              </a> 
+        </div>
+
+      <!--Overlayed Search Window-->
+          <div id="myOverlaySearch" class="overlaySearch">
+            <span class="closebtn" onclick="closeSearch()" title="Close Overlay">×</span>
+            <div class="overlay-content">
+              <form action="/action_page.php">
+                <input type="text" placeholder="Search.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+              </form>
+            </div>
+          </div>
+
+
+
+    <!-- .........CONTENT -->
+    <div class="content">
+          <div class="row">
+            <div class="leftcolumn" >
+
+                <!--CARD MENU-->
+                  <div class="cardMenu" style=" padding: 10px 10px;">
+                    <p style="font-size: 20px">
+                      <img src="/profiles/{{Image}}" alt="Avatar" style="vertical-align: middle; width: 65px; height:65px;border-radius: 50%;   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 5);"> &nbsp; Welcome, <b>{{user}}</b> 
+                    </p>
+                    &nbsp;
+                    <hr>
+                    <div class="containers">           
+                       <p style="font-size: 19px"> Dashboard:</p>
+                      &nbsp;<a href="#Status" style="cursor:pointer;font-size: 16px;padding: 5px;text-decoration: none;"><i class="fa fa-area-chart" style="font-size: 12px;"></i> Status</a><br><br>
+                      &nbsp;<a href="#Celebrants" style="cursor:pointer;font-size: 16px;padding: 5px;text-decoration: none;"><i class="fa fa-group" style="font-size: 12px;"></i> Monthly Celebrants</a><br><br>
+                    </div>
+                  </div>
+
+                <!--CARD SECTION COUNTER-->
+                    <div class="cardSecCounter">
+                          <h2><i class="fas fa-eye" style="font-size: 20px"></i> OVERVIEW</h2>
+                          <div class="row">
+
+                                <div class="column" >
+                                  <div class="cardSCol" style="background-color:#3F94F6">
+                                    <h3>{{Active}}</h3>
+                                    <p>Active</p>
+                                  </div>
+                                </div>
+                                
+                                <div class="column">
+                                  <div class="cardSCol" style="background-color:#FF6347">
+                                    <h3>{{Inactive}}</h3>
+                                    <p>Inactive</p>
+                                  </div>
+                                </div>
+                                
+                                <div class="column">
+                                  <div class="cardSCol" style="background-color:    #8FBC8F">
+                                    <h3>{{UserCount}}</h3>
+                                    <p>User(s)</p>
+                                  </div>
+                                </div>
+                          </div>
+                    </div>
+            </div>
+
+
+            <div class="rightcolumn">
+
+                    <!--CARD stat-->
+                    <div id="Status" class="cardStatus">
+                      <h2 style="cursor:pointer;"><i class="fa fa-area-chart"></i> Status</h2>
+                      <div id="StatusX" style=" padding:25px 0;max-width:100%; height: 500px;"></div>
+                    </div>
+
+                  <!--CARD Celebrants-->
+                    <div id="Celebrants" class="cardStatus">
+                      <h2 style="cursor:pointer;"><i class="fa fa-bar-chart"></i> Monthly Celebrant(s)</h2>  
+                      <div id="CelebrantsX" style="width: 100%; height: 500px;overflow-x:auto;">  
+                                    <table id="tblCeleb" >
+                                          <thead>
+                                            <tr>
+                                              <th>Name</th>
+                                              <th>Sabath</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody style="overflow:scroll;">
+                                            {{#each results}}
+                                            <tr>  
+                                              <td>{{ Name }}</td>
+                                              <td>{{ Date }}</td>   
+                                           </tr>
+                                            {{/each}}
+                                          </tbody>
+                                    </table>
+                       </div>
+                    </div>
+
+            </div>
+        </div>  <!--Row Class end-->
+    </div>  <!--Content Class end-->
+
+    <!-- .........Back to Top Button (Show when neccesary) -->
+      <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+    <!-- .............FOOTER -->
+      <div class="footer">
+        <h2 style="font-size: 13px; ">© 2019 Copyright JedBanaag.</h2>
+      </div>
+      
+</body>
+</html>
+
+
+<script>  
+
+  //Get data of KKTK Status Google chart 
+  getStatData({{SrKKTKAct}},{{SrKKTKIn}},{{JrKKTKAct}},{{JrKKTKIn}});
+</script>
